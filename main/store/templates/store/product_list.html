@@ -5,6 +5,23 @@
     <title>Product List</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <p>Добро пожаловать, <a href="{% url 'profile' %}">{{ user.username }}</a>!</p>
+
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+
+
+    {% else %}
+        <p>Добро пожаловать, гость!</p>
+    <a  href="{% url 'signin' %}"><button>Логин</button></a>
+    <a  href="{% url 'signup' %}"><button>Регистрация</button></a>
+
+
+    {% endif %}
     <h1>Products</h1>
     <ul>
 
