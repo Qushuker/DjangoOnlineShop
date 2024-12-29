@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
@@ -27,3 +28,4 @@ class CustomPasswordChangeForm(PasswordChangeForm):
     class Meta:
         model = User  # Убедитесь, что вы импортировали модель User
         fields = ('old_password', 'new_password1', 'new_password2')
+
