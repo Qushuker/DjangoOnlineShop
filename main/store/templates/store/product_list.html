@@ -48,9 +48,14 @@
 <ul>
     {% for product in products %}
         <li><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
+        <form action="{% url 'add_to_cart' product.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Добавить в корзину</button>
+        </form>
     {% empty %}
         <li>No products available.</li>
     {% endfor %}
 </ul>
+
 </body>
 </html>

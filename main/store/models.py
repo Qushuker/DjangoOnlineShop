@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.views.generic import DetailView
 
@@ -32,13 +33,8 @@ class Product(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products')
 
-
-
     def __str__(self):
         return self.name
-
-
-
 
 
 class ProductDetailView(DetailView):
@@ -46,4 +42,13 @@ class ProductDetailView(DetailView):
     template_name = 'store/product_detail.html'
     context_object_name = 'product'
 
+
+class Cart(models.Model):
+    products = models.ManyToManyField(Product, through='CartItem')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
 
