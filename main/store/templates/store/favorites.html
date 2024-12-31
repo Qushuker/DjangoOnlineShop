@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Действия</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+            <form action="{% url 'remove_from_favorites' product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Удалить из избранного</button>
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="3">Нет избранных товаров.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

@@ -47,7 +47,12 @@
 
 <ul>
     {% for product in products %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
         <li><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
+        <form action="{% url 'add_to_favorites' product.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Добавить в избранное</button>
+        </form>
         <form action="{% url 'add_to_cart' product.id %}" method="post">
             {% csrf_token %}
             <button type="submit">Добавить в корзину</button>

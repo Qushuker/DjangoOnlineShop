@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Category, Color, Size, Cart, CartItem
+from .models import Product, Category, Color, Size, Cart, CartItem, FavoriteItem
 
 
 def product_list(request):
@@ -8,16 +8,12 @@ def product_list(request):
     color_id = request.GET.get('color')
     size_id = request.GET.get('size')
     products = Product.objects.all()
-
-
-
     if category_id:
         products = products.filter(category_id=category_id)
     if color_id:
         products = products.filter(color_id=color_id)
     if size_id:
         products = products.filter(size_id=size_id)
-
     categories = Category.objects.all()
     colors = Color.objects.all()
     sizes = Size.objects.all()
@@ -46,3 +42,19 @@ def cart_view(request):
         for item in cart.cartitem_set.all():
             total_cost += item.product.price * item.quantity
     return render(request, 'store/cart.html', {'cart': cart, 'total_cost': total_cost})
+
+
+def add_to_favorites(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    FavoriteItem.objects.get_or_create(user=request.user, product=product)
+    return redirect('favorites')
+
+def remove_from_favorites(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    FavoriteItem.objects.filter(user=request.user, product=product).delete()
+    return redirect('favorites')
+
+def favorites(request):
+    favorite_items = FavoriteItem.objects.filter(user=request.user)
+    products = [item.product for item in favorite_items]
+    return render(request, 'store/favorites.html', {'products': products})
