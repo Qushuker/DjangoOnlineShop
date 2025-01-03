@@ -14,5 +14,6 @@ urlpatterns = [
     path('add_to_favorites/<int:product_id>/', add_to_favorites, name='add_to_favorites'),
     path('remove_from_favorites/<int:product_id>/', remove_from_favorites, name='remove_from_favorites'),
     path('favorites/', favorites, name='favorites'),
+    path('products/', product_list, name='product_list'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

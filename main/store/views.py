@@ -6,21 +6,48 @@ from .models import Product, Category, Color, Size, Cart, CartItem, FavoriteItem
 from django.http import JsonResponse
 
 
+
 def product_list(request):
-    category_id = request.GET.get('category')
-    color_id = request.GET.get('color')
-    size_id = request.GET.get('size')
+    category_id = request.GET.get('category', '')
+    color_id = request.GET.get('color', '')
+    size_id = request.GET.get('size', '')
+    sort_by = request.GET.get('sort', 'name')  # Получаем параметр сортировки из URL
+    order = request.GET.get('order', 'asc')  # Получаем направление сортировки
+
     products = Product.objects.all()
+
+    # Применяем фильтры, если они указаны
     if category_id:
         products = products.filter(category_id=category_id)
     if color_id:
         products = products.filter(color_id=color_id)
     if size_id:
         products = products.filter(size_id=size_id)
+
+    # Применяем сортировку
+    if order == 'desc':
+        products = products.order_by('-' + sort_by)  # Обратная сортировка
+    else:
+        products = products.order_by(sort_by)  # Обычная сортировка
+
+    # Переключаем направление сортировки для следующего запроса
+    next_order = 'desc' if order == 'asc' else 'asc'
+
     categories = Category.objects.all()
     colors = Color.objects.all()
     sizes = Size.objects.all()
-    return render(request, 'store/product_list.html', {'products': products, 'categories': categories, 'colors': colors, 'sizes': sizes})
+
+    return render(request, 'store/product_list.html', {
+        'products': products,
+        'categories': categories,
+        'colors': colors,
+        'sizes': sizes,
+        'sort_by': sort_by,
+        'next_order': next_order,
+        'category_id': category_id,  # Сохраняем выбранные фильтры
+        'color_id': color_id,
+        'size_id': size_id,
+    })
 
 @login_required
 def add_to_cart(request, product_id):
@@ -61,3 +88,4 @@ def favorites(request):
     favorite_items = FavoriteItem.objects.filter(user=request.user)
     products = [item.product for item in favorite_items]
     return render(request, 'store/favorites.html', {'products': products})
+
