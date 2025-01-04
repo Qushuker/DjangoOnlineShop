@@ -46,11 +46,12 @@
 <ul class="items">
     {% for product in products %}
         <div class="item">
+            <p class="article">Артикул: {{ product.sku }}</p>
             {% if product.image %}
-
             <img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}">
             {% endif %}
             <li ><a class="productName" href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
+            <li>Цвет: {{ product.color }} Размер: {{ product.size }}</li>
             <li> {{ product.price }} </li>
             <form action="{% url 'add_to_favorites' product.id %}" method="post">
                 {% csrf_token %}

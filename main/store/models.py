@@ -1,6 +1,9 @@
+import random
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.views.generic import DetailView
+import uuid
 
 
 
@@ -33,6 +36,16 @@ class Product(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products')
     image = models.ImageField(upload_to='products/', blank=True)
+    sku = models.CharField(max_length=100, unique=True, blank=True)
+
+    def generate_sku(self):
+        """Генерация уникального SKU из 8 цифр."""
+        return str(random.randint(10000000, 99999999))
+
+    def save(self, *args, **kwargs):
+        if not self.sku:
+            self.sku = self.generate_sku()  # Генерация уникального артикула
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

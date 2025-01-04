@@ -13,7 +13,6 @@ def product_list(request):
     size_id = request.GET.get('size', '')
     sort_by = request.GET.get('sort', 'name')  # Получаем параметр сортировки из URL
     order = request.GET.get('order', 'asc')  # Получаем направление сортировки
-
     products = Product.objects.all()
 
     # Применяем фильтры, если они указаны
@@ -36,6 +35,15 @@ def product_list(request):
     categories = Category.objects.all()
     colors = Color.objects.all()
     sizes = Size.objects.all()
+    #Количество товаров в корзине
+    if request.user.is_authenticated:
+        try:
+            cart = Cart.objects.get(user=request.user)
+            total_items = sum(cartitem.quantity for cartitem in cart.cartitem_set.all())
+        except Cart.DoesNotExist:
+            total_items = 0
+    else:
+        total_items = 0
 
     return render(request, 'store/product_list.html', {
         'products': products,
@@ -44,9 +52,10 @@ def product_list(request):
         'sizes': sizes,
         'sort_by': sort_by,
         'next_order': next_order,
-        'category_id': category_id,  # Сохраняем выбранные фильтры
+        'category_id': category_id,
         'color_id': color_id,
         'size_id': size_id,
+        'total_items': total_items
     })
 
 @login_required
@@ -88,4 +97,3 @@ def favorites(request):
     favorite_items = FavoriteItem.objects.filter(user=request.user)
     products = [item.product for item in favorite_items]
     return render(request, 'store/favorites.html', {'products': products})
-

@@ -96,4 +96,8 @@ li{
 .productName:hover{
     color:gray;
 }
-        
+
+.article{
+    color:grey;
+    font-size:10px;
+}
