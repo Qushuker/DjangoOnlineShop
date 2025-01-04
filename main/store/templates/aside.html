@@ -1,18 +1,25 @@
-<div class="aside">
-  <div class="asideContent">
+{% load static %}
+
+
+<div id="menu" class="sidebar">
+    <button id="toggleButton" class="toggle-button">☰</button>
+      <div id="content" class="asideContent">
 {% if user.is_authenticated %}
-  <p>Добро пожаловать, <a href="{% url 'profile' %}">{{ user.username }}</a>!</p>
-  <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button class="btn" type="submit">Выйти</button>
-  </form>
-  {% else %}
-    <p>Добро пожаловать, гость!</p>
-    <a href="{% url 'signin' %}"><button class="btn">Логин</button></a>
-    <a href="{% url 'signup' %}"><button class="btn">Регистрация</button></a>
-  {% endif %}
-  <div class="cart-count">
-    Товары в корзине: {{ total_items }}
-  </div>
-    </div>
+        <p class="greet">Добро пожаловать, <a class="greet" href="{% url 'profile' %}">{{ user.username }}</a>!</p>
+        <form action="{% url 'logout' %}" method="post">
+{% csrf_token %}
+        <button class="btn" type="submit">Выйти</button>
+        </form>
+{% else %}
+        <p class="greet">Добро пожаловать, гость!</p>
+        <a href="{% url 'signin' %}"><button class="btn">Логин</button></a>
+        <a href="{% url 'signup' %}"><button class="btn">Регистрация</button></a>
+        {% endif %}
+        <div class="cart-count">
+            Товары в корзине: {{ total_items }}
+        </div>
+        </div>
 </div>
+
+
+<script src="{% static 'aside.js' %}"></script>

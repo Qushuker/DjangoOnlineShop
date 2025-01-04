@@ -9,12 +9,14 @@
 </head>
 <body>
 <div class="site">
+   
+{% include 'aside.html' %}
 
-    {% include 'aside.html' %}
-
-    <div class="content">
-        {% block body %}
-        {% endblock %}
+<div class="content">
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
     </div>
 </div>
 </body>

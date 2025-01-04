@@ -1,6 +1,20 @@
-body{
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
     margin: 0;
     font-size: 20px;
+}
+
+.container {
+    width: 1200px; /* Ширина контейнера */
+    padding: 20px; /* Внутренние отступы */
+    text-align: center; /* Выравнивание текста по центру */
+}
+.greet{
+    color: white;
+    text-decoration: none;
 }
 li{
     list-style: none;
@@ -10,13 +24,34 @@ li{
     display:flex;
     
 }
-.aside{
-    width: 20%;
+.sidebar {
+    width: 250px;
     height: 100vh;
-    background-color:#bfc8d6;
-    
-    
+    background-color: #333;
+    color: white;
+    position: fixed;
+    left: -200px; /* Скрыто по умолчанию */
+    transition: left 0.3s ease;
+    padding-top: 40px; /* Отступ сверху для кнопки */
 }
+
+.sidebar.active {
+    left: 0; /* Показываем меню */
+}
+
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
 .asideContent{
     padding: 20px;
     text-align: center;
@@ -52,14 +87,13 @@ li{
     width: 20%;
 }
 
-.container{
-    text-align: center;
-    margin: 0 auto;
-    width: 700px;
-}
+
 
 .content{
-    display: block;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn{
