@@ -31,7 +31,7 @@ class Size(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     color = models.ForeignKey(Color, on_delete=models.CASCADE, related_name='products')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, related_name='products')

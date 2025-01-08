@@ -5,13 +5,13 @@
     <button id="toggleButton" class="toggle-button">☰</button>
       <div id="content" class="asideContent">
 {% if user.is_authenticated %}
-        <p class="greet">Добро пожаловать, <a class="greet" href="{% url 'profile' %}">{{ user.username }}</a>!</p>
+        <p>Добро пожаловать, <a class="profileLink" href="{% url 'profile' %}">{{ user.username }}</a>!</p>
         <form action="{% url 'logout' %}" method="post">
 {% csrf_token %}
         <button class="btn" type="submit">Выйти</button>
         </form>
 {% else %}
-        <p class="greet">Добро пожаловать, гость!</p>
+        <p class="profileLink">Добро пожаловать, гость!</p>
         <a href="{% url 'signin' %}"><button class="btn">Логин</button></a>
         <a href="{% url 'signup' %}"><button class="btn">Регистрация</button></a>
         {% endif %}
