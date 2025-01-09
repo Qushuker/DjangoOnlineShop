@@ -21,11 +21,7 @@
    <div class="productInner">
     {% if product.image %}
     <div class="productImages">
-        <div class="slider">
-            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
-            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
-            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
-        </div>
+        <img class="productImage_detail" src="{{ product.image.url }}" alt="{{ product.name }}">
         
     </div>
     {% endif %}

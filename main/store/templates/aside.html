@@ -14,10 +14,18 @@
         <p class="profileLink">Добро пожаловать, гость!</p>
         <a href="{% url 'signin' %}"><button class="btn">Логин</button></a>
         <a href="{% url 'signup' %}"><button class="btn">Регистрация</button></a>
-        {% endif %}
-        <div class="cart-count">
-            Товары в корзине: {{ total_items }}
-        </div>
+          {% endif %}
+
+
+          {% if user.is_authenticated %}
+          <div class="cart-count">
+              Товары в корзине: {{ total_items }}
+          </div>
+          <div class="">
+          <a href="{% url 'favorites' %}">Избранное</a>
+          <a href="{% url 'cart_view' %}">Корзина</a>
+          </div>
+          {% endif %}
         </div>
 </div>
 

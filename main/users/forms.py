@@ -26,6 +26,6 @@ class UserUpdateForm(forms.ModelForm):
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     class Meta:
-        model = User  # Убедитесь, что вы импортировали модель User
+        model = User
         fields = ('old_password', 'new_password1', 'new_password2')
 

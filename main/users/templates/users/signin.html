@@ -1,5 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+{% block body %}
+
+<div class="userForm">
+<div class="container">
+    <div class="userFormInner">
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Войти</button>
 </form>
+    </div>
+</div>
+</div>
+{% endblock %}
