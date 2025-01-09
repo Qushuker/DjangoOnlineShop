@@ -1,17 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.description }}</p>
-    <p>Цена: {{ product.price }} руб.</p>
+
+{% block body %}
+  <div class="header">
+     <div class="container">
+        <div class="headerInner">
+            <div class="logo">RayShop</div>
+         
+         <a class="headerLink" href="{% url 'product_list' %}">Назад к списку продуктов</a>
+         </div>
+     </div>
+  </div>
+   <div class="product">
+   <div class="container">
+   <div class="productInner">
+    {% if product.image %}
+    <div class="productImages">
+        <div class="slider">
+            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
+            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
+            <div class="sliderItem"><img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}"></div>
+        </div>
+        
+    </div>
+    {% endif %}
+    <div class="productContent">
+        <p class="productArticle_detail">{{ product.sku }}</p>
+        <h1 class="productName_detail">{{ product.name }}</h1>
+        <p class="productDescription_detail">{{ product.description }}</p>
+        <p class="productFeatures_detail">Цвет: {{ product.color }} Размер: {{ product.size }}</p>
+        <p class="productPrice_detail">Цена: {{ product.price }} руб.</p>
+    </div>
+    </div>
+    
+    </div>
+    </div>
 
 
 
+    
 
-    <a href="{% url 'product_list' %}">Назад к списку продуктов</a>
-</body>
-</html>
+{% endblock %}

@@ -82,6 +82,10 @@ li{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid black;
+    
+}
+.headerLink{
+    padding-top: 6px;
 }
 /* INTRO */
 .intro{
@@ -159,6 +163,40 @@ li{
     height: 20px;
 }
 
+/* PRODUCT */
+.product{
+    
+}
+.productInner{
+    padding-top: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+.productContent{
+    text-align: center;
+    
+}
+.productArticle_detail{
+    font-size: 14;
+    color: gray;
+}
+.productName_detail{
+    font-size: 25px;
+    color:black;
+    
+}
+.productDescription_detail{
+    font-size: 20px;
+    color:black;
+}
+.productFeatures_detail{
+    font-size: 20px;
+    color:black;
+}
+.productPrice_detail{
+    font-size: 20px;
+    color:black;
+}
 /* BUTTONS */
 .btn{
     box-shadow:inset 0px 1px 0px 0px #ffffff;
