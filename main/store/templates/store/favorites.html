@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
+{% block title %}
+Избранное
+{% endblock %}
+
+{% block body %}
+
+<div class="favorites"><div class="container"><div class="favoritesInner">
 <table>
     <tr>
         <th>Товар</th>
@@ -19,7 +21,10 @@
         <td>
             <form action="{% url 'remove_from_favorites' product.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit">Удалить из избранного</button>
+                <a href="#" class="toggle-favorites itemButton" data-product-id="{{ product.id }}" data-favorited="false">
+                    <img class="heart" src="{% static 'img/icons/heart-off.svg' %}" alt="">
+                </a>
+
             </form>
         </td>
     </tr>
@@ -30,6 +35,5 @@
     {% endfor %}
 </table>
 <a href="{% url 'product_list' %}">Домой</a>
-
-</body>
-</html>
+</div></div></div>
+{% endblock %}

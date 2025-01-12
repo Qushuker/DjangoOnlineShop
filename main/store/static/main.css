@@ -22,6 +22,8 @@ a{
 li{
     list-style: none;
 }
+
+
 /* ASIDE */
 
 .sidebar {
@@ -30,7 +32,7 @@ li{
     background-color: #333;
     color: white;
     position: fixed;
-    left: -200px;
+    left: -225px;
     transition: left 0.3s ease;
     padding-top: 50px;
     z-index: 1001;
@@ -41,6 +43,7 @@ li{
 }
 
 .toggle-button {
+    display: none;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -51,7 +54,14 @@ li{
     cursor: pointer;
     font-size: 18px;
 }
-
+.toggle-buttonHeader{
+    color: black;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: rgba(0,0,0,0);
+}
 
 .asideContent{
     padding: 20px;
@@ -87,15 +97,41 @@ li{
 .headerLink{
     padding-top: 6px;
 }
+
+.filter{
+    padding-top: 120px;
+    text-align: center;
+}
+.leftSideHeader{
+    display: flex;
+}
+.rightSideHeader{
+    display: flex;
+}
+.headerLink{
+    color: black;
+    padding: 10px;
+
+}
 /* INTRO */
 .intro{
-    height: 900px;
-    background: url(img/introbackground.jpg) center no-repeat;
+    height: 100vh;
+
 }
 .introInner{
-    padding-top: 100px;
-}
 
+}
+.indexImage{
+    width: 100%;
+    height: 100vh;
+}
+.introInnerTriple{
+    display: flex;
+}
+.indexImageTriple{
+    width: 33%;
+    height: 100%;
+}
 /* ITEMS */
 .items{
     
@@ -155,13 +191,8 @@ li{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-.itemButton{
-    
-}
-.heart{
-    width: 20px;
-    height: 20px;
-}
+
+
 
 /* PRODUCT */
 .product{
@@ -234,4 +265,60 @@ li{
 }
 .userFormInner{
     text-align: center;
+}
+
+.cart{
+    margin: 0;
+    padding-top: 100px;
+}
+.favorites{
+    margin: 0;
+    padding-top: 100px;
+}
+
+.toggle-favorites {
+    padding: 10px;
+    background-color: white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggle-favorites.favorited {
+    background-color: #28a745;
+}
+
+.itemButton{
+    background-color: white;
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+.heart{
+    margin-top: 8px;
+    width: 20px;
+    height: 20px;
+}
+
+/* FOOTER */
+
+.footer{
+    width: 100%;
+    height: 250px;
+    background-color: #333;
+}
+.footerInner{
+    padding-top: 65px;
+    display: flex;
+    justify-content: space-around;
+}
+.footerString{
+    text-align: center;
+}
+.footerLink{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }

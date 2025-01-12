@@ -2,53 +2,39 @@
 {% load static %}
 
 {% block title %}
-Главная страница
+Каталог
 {% endblock %}
 
 {% block body %}
-<div class="header">
-    <div class="container">
-        <div class="headerInner">
-            <div class="logo">
-                RayShop
-            </div>
-            <div class="filter">
-                    <form method="get">
-                        <select class="filterItem" name="category">
-                            <option value="">Категория</option>
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}" {% if category.id == category_id %}selected{% endif %}>{{ category.name }}</option>
-                                {% endfor %}
-                        </select>
-                        <select class="filterItem" name="color">
-                            <option value="">Цвет</option>
-                                {% for color in colors %}
-                                    <option value="{{ color.id }}" {% if color.id == color_id %}selected{% endif %}>{{ color.name }}</option>
-                                {% endfor %}
-                        </select>
-                        <select class="filterItem" name="size">
-                            <option value="">Размер</option>
-                                {% for size in sizes %}
-                                    <option value="{{ size.id }}" {% if size.id == size_id %}selected{% endif %}>{{ size.name }}</option>
-                                {% endfor %}
-                        </select>
-                        <button class="btn" type="submit">Применить</button>
 
-                        <a class="btn" href="?sort=name&order={{ next_order }}&category={{ category_id }}&color={{ color_id }}&size={{ size_id }}">По имени</a>
-                        <a class="btn" href="?sort=price&order={{ next_order }}&category={{ category_id }}&color={{ color_id }}&size={{ size_id }}">По цене</a>
-                        <a class="btn" href="{% url 'product_list' %}">RES</a>
-                    </form>
-                </div>
-        </div>
-    </div>
-</div>
-<div class="intro">
-    <div class="container">
-        <div class="introInner">
-            
-        </div>
-    </div>
-</div>
+
+<div class="filter"><div class="container"><div class="filterInner">
+    <form method="get">
+        <select class="filterItem" name="category">
+            <option value="">Категория</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if category.id == category_id %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <select class="filterItem" name="color">
+            <option value="">Цвет</option>
+            {% for color in colors %}
+            <option value="{{ color.id }}" {% if color.id == color_id %}selected{% endif %}>{{ color.name }}</option>
+            {% endfor %}
+        </select>
+        <select class="filterItem" name="size">
+            <option value="">Размер</option>
+            {% for size in sizes %}
+            <option value="{{ size.id }}" {% if size.id == size_id %}selected{% endif %}>{{ size.name }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn" type="submit">Применить</button>
+
+        <a class="btn" href="?sort=name&order={{ next_order }}&category={{ category_id }}&color={{ color_id }}&size={{ size_id }}">По имени</a>
+        <a class="btn" href="?sort=price&order={{ next_order }}&category={{ category_id }}&color={{ color_id }}&size={{ size_id }}">По цене</a>
+        <a class="btn" href="{% url 'product_list' %}">RES</a>
+    </form>
+</div></div></div>
 <div class="items">
     <div class="container">
        <div class="itemsInner">
@@ -62,17 +48,23 @@
                                 <img class="productImage" src="{{ product.image.url }}" alt="{{ product.name }}">
                             </a>
                         {% endif %}
+
                         <li ><a class="productName" href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></li>
                         <li class="itemFeatures">Цвет: {{ product.color }} Размер: {{ product.size }}</li>
                         <li class="itemPrice">{{ product.price }}₽</li>
+
                         <div class="itemButtons">
-                        <form class="itemButton" action="{% url 'add_to_favorites' product.id %}" method="post">
+                        <form action="{% url 'add_to_favorites' product.id %}" method="post">
                             {% csrf_token %}
-                            <button class="btn" type="submit"><img class="heart" src="{% static '/img/icons/heart-regular.svg' %}" alt=""></button>
+                            <a href="#" class="toggle-favorites itemButton" data-product-id="{{ product.id }}" data-favorited="false">
+                                <img class="heart" src="{% static 'img/icons/heart-off.svg' %}" alt="">
+                            </a>
                         </form>
-                        <form class="itemButton" action="{% url 'add_to_cart' product.id %}" method="post">
+                        <form action="{% url 'add_to_cart' product.id %}" method="post">
                             {% csrf_token %}
-                            <button class="btn add-to-cart" data-product-id="{{ product.id }}"><img class="heart" src="{% static '/img/icons/cart-shopping-solid.svg' %}" alt=""></button>
+
+                            <button class="add-to-cart-button itemButton" data-product-id="{{ product.id }}">Add</button>
+
                         </form>
                         </div>
                         </div>

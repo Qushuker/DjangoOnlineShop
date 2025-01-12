@@ -1,0 +1,45 @@
+{% load static %}
+
+<div class="header">
+    <div class="container">
+        <div class="headerInner">
+            <div class="leftSideHeader">
+                <div class="openAsideButton">
+                    <button id="toggleButtonHeader" class="toggle-buttonHeader">☰</button>
+                </div>
+                <div class="logo">
+                    <a class="headerLink" href="{% url 'index' %}">RayShop</a>
+                </div>
+            </div>
+            <div class="rightSideHeader">
+                {% if user.is_authenticated %}
+                <div class="headerItem">
+                    <a class="headerLink" href="{% url 'product_list' %}">Каталог</a>
+                </div>
+                <div class="headerItem">
+                    <a class="headerLink" href="{% url 'favorites' %}">Избранное</a>
+                </div>
+                <div class="headerItem">
+                    <a class="headerLink" href="{% url 'cart_view' %}">
+                        Корзина
+                        <span id="cart-total-items">{{ total_items }}</span>
+                    </a>
+                </div>
+                <div class="headerItem">
+                    <a class="headerLink" href="{% url 'profile' %}">{{ user.username }}!</a>
+                </div>
+                <div class="headerItem">
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn" type="submit">Выйти</button>
+                </form>
+                </div>
+
+                {% else %}
+                    <a href="{% url 'signin' %}"><button class="btn">Логин</button></a>
+                    <a href="{% url 'signup' %}"><button class="btn">Регистрация</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

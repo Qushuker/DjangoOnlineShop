@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CART</title>
-</head>
-<body>
-<h1>Ваша корзина</h1>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Корзина
+{% endblock %}
+
+{% block body %}
+<div class="cart"><div class="container"><div class="cartInner">
+    <h1>Ваша корзина</h1>
 <table>
     <tr>
         <th>Товар</th>
@@ -18,6 +20,9 @@
             <td>{{ item.product.name }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.product.price }}</td>
+            <td><a href="{% url 'increase_quantity' item.product.id %}">+</a>
+                <a href="{% url 'decrease_quantity' item.product.id %}">-</a></td>
+            <td><a href="{% url 'remove_from_cart' item.product.id %}">Удалить</a></td>
         </tr>
         {% endfor %}
         <tr>
@@ -29,8 +34,10 @@
             <td colspan="3">Ваша корзина пуста.</td>
         </tr>
     {% endif %}
+
 </table>
+<a href="{% url 'clear_cart' %}">Очистить корзину</a>
 
 <a href="{% url 'product_list' %}">Домой</a>
-</body>
-</html>
+</div></div></div>
+{% endblock %}
